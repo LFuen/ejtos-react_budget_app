@@ -1,27 +1,34 @@
-
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const AllocationForm = (props) => {
-    const { dispatch,remaining  } = useContext(AppContext);
+    const { dispatch,remaining, expenses  } = useContext(AppContext);
 
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
     const [action, setAction] = useState('');
 
+    const totalExpenses = expenses.reduce((total, item) => total + item.cost, 0);
+
     const submitEvent = () => {
-
-            if(cost > remaining) {
-                alert("The value cannot exceed remaining funds  £"+remaining);
-                setCost("");
-                return;
-            }
-
         const expense = {
             name: name,
             cost: parseInt(cost),
         };
+
+        if(cost > remaining && action === 'Add') {
+            alert("The value cannot exceed remaining funds  £"+remaining);
+            setCost("");
+            return;
+        }
+
         if(action === "Reduce") {
+            const newBudget = remaining + totalExpenses - cost;
+            if (newBudget < totalExpenses) {
+                alert('You cannot reduce the budget value lower than the spending');
+                setCost("");
+                return;
+            }
             dispatch({
                 type: 'RED_EXPENSE',
                 payload: expense,

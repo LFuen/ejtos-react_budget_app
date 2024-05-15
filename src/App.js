@@ -31,19 +31,21 @@ const App = () => {
                         {
                             <div className='col-sm'><ExpenseTotal /></div>
                         }        
-                       
+                </div>
+                <div className='row mt-3'>
                         {
                             <div className='col-sm'><ExpenseList /></div>
-                        }         
-
+                        } 
+                </div>
+                <div className='row mt-3'>
                         {
                             <div className='col-sm'><ExpenseItem /></div>
-                        }        
-
+                        }
+                </div>
+                <div className='row mt-3'>
                         {
                             <div className='col-sm'><AllocationForm /></div>
-                        }        
-
+                        }                         
                 </div>
             </div>
         </AppProvider>
