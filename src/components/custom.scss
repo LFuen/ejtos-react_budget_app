@@ -1,0 +1,19 @@
+// custom.scss
+@import "~bootstrap/scss/bootstrap";
+
+#currency-item {
+    background-color: #90EE90 !important;
+    border-color: #90EE90 !important;
+    color: rgb(255, 255, 255) !important;
+
+}
+
+.custom-dropdown-menu {
+    background-color: #90EE90 !important;
+    
+    &:hover {
+        background-color: #ffffff !important;
+        border-color: #ffffff !important;
+        color: black !important;
+    }
+}

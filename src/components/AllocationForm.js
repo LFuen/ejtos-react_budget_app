@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const AllocationForm = (props) => {
-    const { dispatch,remaining, expenses  } = useContext(AppContext);
+    const { dispatch,remaining, expenses, currency  } = useContext(AppContext);
 
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
@@ -16,14 +16,14 @@ const AllocationForm = (props) => {
             cost: parseInt(cost),
         };
 
-        if(cost > remaining && action === 'Add') {
+        if(cost > remaining) {
             alert("The value cannot exceed remaining funds  £"+remaining);
             setCost("");
             return;
         }
 
         if(action === "Reduce") {
-            const newBudget = remaining + totalExpenses - cost;
+            const newBudget = remaining + totalExpenses - expense.cost;
             if (newBudget < totalExpenses) {
                 alert('You cannot reduce the budget value lower than the spending');
                 setCost("");
@@ -67,18 +67,20 @@ const AllocationForm = (props) => {
                 <option value="Reduce" name="Reduce">Reduce</option>
                   </select>
 
+                <div>
+                    <span style={{ marginLeft: '2rem' , marginRight: '1rem', size: 10}}>{currency}</span>
                     <input
                         required='required'
                         type='number'
                         id='cost'
                         value={cost}
-                        style={{ marginLeft: '2rem' , size: 10}}
+                        style={{ size: 20}}
                         onChange={(event) => setCost(event.target.value)}>
                         </input>
-
-                    <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
-                        Save
-                    </button>
+                </div>
+                <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
+                    Save
+                </button>
                 </div>
                 </div>
 
